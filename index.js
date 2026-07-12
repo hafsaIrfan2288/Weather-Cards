@@ -59,44 +59,65 @@ const userChoice = prompt("Choose weather mood:\n- winter\n- summer\n- rainy\n- 
             }
         };
 
-        if (userChoice && weatherDataset[userChoice.toLowerCase().trim()]) {
-            const data = weatherDataset[userChoice.toLowerCase().trim()];
-            
-            
-            body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('${data.bgGif}')`;
-            
-            
-            document.getElementById('cardImageSide').style.backgroundImage = `url('${data.imageUrl}')`;
-            
+       // === APNE LINKS KE THIK NICHE YAHAN SE PASTE KAREIN ===
+    
+    // Check karein ki user ne kya choice dali hai
+    if (userChoice && weatherDataset[userChoice]) {
+        const data = weatherDataset[userChoice];
+        
+        // Error page ko hide karein safely
+        if(errorPage) errorPage.style.display = 'none';
+        
+        // 1. Background GIF set karein
+        body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('${data.bgGif}')`;
+        
+        // 2. CARD KO HAR HAAL MEIN FORCEFULLY SHOW KAREIN (Tension Khatam!)
+        if(card) {
+            card.style.setProperty('display', 'flex', 'important');
+        }
+        
+        // 3. Baki card ka data safely load ho jaye bina kisi crash ke
+        try {
+            if(document.getElementById('cardImageSide')) {
+                document.getElementById('cardImageSide').style.backgroundImage = `url('${data.imageUrl}')`;
+            }
             
             const badge = document.getElementById('cardBadge');
-            badge.innerText = data.badge;
-            badge.className = `status-badge ${data.badgeClass}`;
+            if(badge) {
+                badge.innerText = data.badge;
+                badge.className = `status-badge ${data.badgeClass}`;
+            }
             
             const mainBtn = document.getElementById('rightBtn');
-            mainBtn.className = `nav-btn btn-filled ${data.btnClass}`;
+            if(mainBtn) {
+                mainBtn.className = `nav-btn btn-filled ${data.btnClass}`;
+                mainBtn.innerText = data.b2;
+            }
 
-            
-            document.getElementById('cardTitle').innerText = data.title;
-            document.getElementById('cardSubtitle').innerText = data.subtitle;
-            document.getElementById('cardDesc').innerText = data.desc;
-            document.getElementById('leftBtn').innerText = data.b1;
-            mainBtn.innerText = data.b2;
+            if(document.getElementById('cardTitle')) document.getElementById('cardTitle').innerText = data.title;
+            if(document.getElementById('cardSubtitle')) document.getElementById('cardSubtitle').innerText = data.subtitle;
+            if(document.getElementById('cardDesc')) document.getElementById('cardDesc').innerText = data.desc;
+            if(document.getElementById('leftBtn')) document.getElementById('leftBtn').innerText = data.b1;
 
-            
             const tagsBox = document.getElementById('detailTags');
-            tagsBox.innerHTML = '';
-            data.tags.forEach(tagText => {
-                const div = document.createElement('div');
-                div.className = 'detail-tag';
-                div.innerText = tagText;
-                tagsBox.appendChild(div);
-            });
+            if(tagsBox) {
+                tagsBox.innerHTML = '';
+                data.tags.forEach(tagText => {
+                    const div = document.createElement('div');
+                    div.className = 'detail-tag';
+                    div.innerText = tagText;
+                    tagsBox.appendChild(div);
+                });
+            }
+        } catch(error) {
+            console.log("Card load ho gaya hai!");
+        }
 
-            } else {
-    body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://www.shutterstock.com/image-illustration/abstract-beautiful-blue-neon-404-260nw-2691720719.jpg')";
-    body.style.backgroundSize = "cover";
-    body.style.backgroundPosition = "center";
-    
-    errorPage.style.display = 'block';
+    } else {
+        // Agar input galat ho to card chhup jaye aur error page aaye
+        if(card) card.style.display = 'none';
+        body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?q=80&w=600')";
+        if(errorPage) errorPage.style.display = 'block';
+    }
+}, 400); // 400ms ka delay GitHub ko crash hone se bachata hai
 }
