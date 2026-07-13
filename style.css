@@ -114,9 +114,6 @@ body {
 .color-rainy { background: #10b981; } .btn-rainy { background: #059669; }
 .color-foggy { background: #64748b; } .btn-foggy { background: #475569; }
 
-/* =======================================================
-   PERFECT RESPONSIVE DESIGN FOR BOTH PC & REAL MOBILE
-   ======================================================= */
 @media (max-width: 768px) {
     body {
         padding: 15px;
@@ -130,7 +127,6 @@ body {
     }
 }
 
-/* Jab screen real mobile screen jitni choti ho (550px) */
 @media (max-width: 550px) {
     body {
         align-items: flex-start;
@@ -139,16 +135,15 @@ body {
 
     .dashboard-card {
         display: flex !important;
-        flex-direction: column !important; /* Mobile par stack vertical hoga */
+        flex-direction: column !important; 
         min-height: auto !important;
         width: 100% !important;
     }
 
-    /* CARD PIC KA DONT-MISS FIX FOR REAL PHONES */
     .card-visual-side {
         display: block !important;
         width: 100% !important;
-        height: 240px !important; /* Fixed height taaki space ban sake */
+        height: 240px !important; 
         min-height: 240px !important;
         background-size: cover !important;
         background-position: center !important;
