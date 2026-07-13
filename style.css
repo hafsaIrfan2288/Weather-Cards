@@ -113,3 +113,61 @@ body {
 .color-summer { background: #f59e0b; color: #0f172a; } .btn-summer { background: #d97706; }
 .color-rainy { background: #10b981; } .btn-rainy { background: #059669; }
 .color-foggy { background: #64748b; } .btn-foggy { background: #475569; }
+
+/* =======================================================
+   MOBILE RESPONSIVE DESIGN (Isse aapke links safe rahenge)
+   ======================================================= */
+@media (max-width: 650px) {
+    body {
+        padding: 10px;
+        align-items: flex-start; /* Mobile par upar se space maintain rahe */
+    }
+
+    .dashboard-card {
+        flex-direction: column; /* Card horizontally se vertically layout ho jaye */
+        min-height: auto;
+        max-width: 100%;
+    }
+
+    .card-visual-side {
+        width: 100%;
+        height: 200px; /* Mobile par top image ki height fix */
+    }
+
+    .card-visual-side::after {
+        /* Mobile par gradient ko left-to-right se top-to-bottom kar rahe hain */
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(21, 28, 44, 0.95)); 
+    }
+
+    .card-info-side {
+        padding: 25px 20px; /* Mobile par spacing thodi kam */
+    }
+
+    .card-info-side h1 {
+        font-size: 1.8rem; /* Heading thodi choti taaki screen se baahar na jaye */
+    }
+
+    .detail-row {
+        margin-bottom: 25px;
+        gap: 8px;
+    }
+
+    .detail-tag {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+    }
+
+    .action-row {
+        flex-direction: column; /* Buttons mobile par ek ke niche ek aayenge */
+        gap: 10px;
+    }
+
+    .nav-btn {
+        width: 100%;
+        padding: 12px;
+    }
+    
+    .error-box h1 {
+        font-size: 2rem;
+    }
+}
